@@ -16,9 +16,16 @@ const CORS_HEADERS = {
     'Origin, X-Requested-With, Content-Type, Accept',
 };
 
+(async () => {
+    await redisClient.connect();
+})();
+
+
 redisClient.on('connect', () => {
   console.log('Redis connected');
 });
+
+redisClient.on('error', (err) => console.log('<:: Redis Client Error', err));
 
 const app = express();
 
